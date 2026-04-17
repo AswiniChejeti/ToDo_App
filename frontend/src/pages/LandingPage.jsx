@@ -34,8 +34,8 @@ const LandingPage = () => {
         
         <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-400">
           <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+          <Link to="/about" className="hover:text-white transition-colors">About</Link>
+          <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
         </div>
 
         <div className="flex items-center gap-4">
@@ -192,7 +192,8 @@ const LandingPage = () => {
           <div>
             <h4 className="font-bold mb-6 text-white uppercase text-xs tracking-widest">Company</h4>
             <ul className="space-y-4 text-slate-500 text-sm">
-              <li><a href="#" className="hover:text-premium-400">About Us</a></li>
+              <li><Link to="/about" className="hover:text-premium-400">About Us</Link></li>
+              <li><Link to="/contact" className="hover:text-premium-400">Contact Us</Link></li>
               <li><a href="#" className="hover:text-premium-400">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-premium-400">Terms of Service</a></li>
             </ul>

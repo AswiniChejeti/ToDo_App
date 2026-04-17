@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { 
   Plus, 
   Moon, 
@@ -25,6 +26,11 @@ const Header = ({ onAddClick, onLogout, user, isDarkMode, setIsDarkMode, stats }
               <span>{stats.completed} DONE</span>
             </div>
           </div>
+        </div>
+        
+        <div className="hidden md:flex items-center gap-8 mr-auto ml-10 text-sm font-bold text-slate-500 dark:text-slate-400">
+          <Link to="/about" className="hover:text-slate-900 dark:hover:text-white transition-colors">About</Link>
+          <Link to="/contact" className="hover:text-slate-900 dark:hover:text-white transition-colors">Contact</Link>
         </div>
 
         <div className="flex items-center gap-4">
