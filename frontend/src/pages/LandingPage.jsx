@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { 
   CheckCircle2, 
@@ -8,11 +8,29 @@ import {
   ShieldCheck, 
   MousePointer2, 
   Calendar,
-  Layers
+  Layers,
+  Target,
+  Users,
+  Shield,
+  Mail,
+  MessageSquare,
+  MapPin
 } from "lucide-react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 const LandingPage = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleContactSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      toast.success("Message sent successfully! We'll get back to you soon.");
+      e.target.reset();
+    }, 1500);
+  };
   return (
     <div className="min-h-screen bg-slate-950 text-white selection:bg-premium-500/30 overflow-x-hidden">
       {/* Background Decor */}
@@ -32,10 +50,10 @@ const LandingPage = () => {
           </span>
         </div>
         
-        <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-400">
+        <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
           <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <Link to="/about" className="hover:text-white transition-colors">About</Link>
-          <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
+          <a href="#about" className="hover:text-white transition-colors">About</a>
+          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
         </div>
 
         <div className="flex items-center gap-4">
@@ -169,6 +187,108 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* About Section */}
+      <section id="about" className="relative z-10 py-32 px-6 max-w-5xl mx-auto flex flex-col items-center text-center">
+        <div className="w-20 h-20 bg-gradient-to-br from-premium-500 to-premium-600 rounded-2xl flex items-center justify-center mb-8 shadow-2xl shadow-premium-500/30">
+           <Layers size={40} className="text-white" />
+        </div>
+        
+        <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-8">
+          About <span className="text-premium-500">TaskFlow.</span>
+        </h2>
+
+        <p className="text-slate-300 text-lg md:text-xl max-w-3xl mb-20 leading-relaxed">
+          We believe that software should get out of your way and let you focus. TaskFlow was built with a singular vision: to create the most intuitive, beautiful, and secure task management experience on the web.
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-8 w-full text-left">
+           {[
+             { icon: <Target className="text-premium-400"/>, title: "Our Mission", desc: "To empower individuals and teams to achieve peak productivity through beautiful, friction-free design." },
+             { icon: <Users className="text-premium-400"/>, title: "Who We Are", desc: "A small team of passionate developers, designers, and perfectionists dedicated to crafting premium web experiences." },
+             { icon: <Shield className="text-premium-400"/>, title: "Our Promise", desc: "Uncompromising privacy. We don't sell your data, we don't serve ads. Your tasks are yours alone." }
+           ].map((item, idx) => (
+             <div key={idx} className="glass-card p-8 border-white/5">
+                <div className="w-12 h-12 rounded-xl bg-premium-500/10 border border-premium-500/20 flex items-center justify-center mb-6">
+                   {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-slate-300 leading-relaxed">{item.desc}</p>
+             </div>
+           ))}
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="relative z-10 py-32 px-6 max-w-6xl mx-auto">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">Let's <span className="text-premium-500">talk.</span></h2>
+          <p className="text-slate-300 text-lg max-w-2xl mx-auto">Have a question, feedback, or just want to say hi? We'd love to hear from you.</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-16 items-start max-w-5xl mx-auto">
+          {/* Contact Info */}
+          <div className="space-y-10">
+            <div>
+              <h3 className="text-2xl font-bold mb-8 text-white">Contact Information</h3>
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-center text-premium-400">
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-400 font-bold uppercase tracking-wider mb-1">Email Us</p>
+                    <p className="text-lg text-slate-200">hello@taskflow.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-center text-premium-400">
+                    <MessageSquare size={20} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-400 font-bold uppercase tracking-wider mb-1">Support</p>
+                    <p className="text-lg text-slate-200">support@taskflow.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Form */}
+          <div>
+            <form onSubmit={handleContactSubmit} className="glass-card p-8 border-white/10 space-y-6">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold tracking-wide text-slate-200">First Name</label>
+                  <input required type="text" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="John" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold tracking-wide text-slate-200">Last Name</label>
+                  <input required type="text" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="Doe" />
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-bold tracking-wide text-slate-200">Email Address</label>
+                <input required type="email" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="john@example.com" />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-bold tracking-wide text-slate-200">Message</label>
+                <textarea required rows="4" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors resize-none" placeholder="How can we help you?"></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                disabled={loading}
+                className="w-full py-4 bg-premium-500 hover:bg-premium-600 text-white rounded-xl font-bold md:text-lg transition-all shadow-lg shadow-premium-500/20 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="relative z-10 bg-slate-950 border-t border-white/5 pt-20 pb-10 px-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
@@ -191,9 +311,9 @@ const LandingPage = () => {
           </div>
           <div>
             <h4 className="font-bold mb-6 text-white uppercase text-xs tracking-widest">Company</h4>
-            <ul className="space-y-4 text-slate-500 text-sm">
-              <li><Link to="/about" className="hover:text-premium-400">About Us</Link></li>
-              <li><Link to="/contact" className="hover:text-premium-400">Contact Us</Link></li>
+            <ul className="space-y-4 text-slate-400 text-sm">
+              <li><a href="#about" className="hover:text-premium-400">About Us</a></li>
+              <li><a href="#contact" className="hover:text-premium-400">Contact Us</a></li>
               <li><a href="#" className="hover:text-premium-400">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-premium-400">Terms of Service</a></li>
             </ul>

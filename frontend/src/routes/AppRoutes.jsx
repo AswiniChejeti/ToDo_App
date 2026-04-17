@@ -5,8 +5,6 @@ import LandingPage from '../pages/LandingPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import SignupPage from '../pages/Auth/SignupPage';
 import MainDashboard from '../App';
-import About from '../pages/About';
-import Contact from '../pages/Contact';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -39,10 +37,6 @@ const AppRoutes = () => {
       <Route path="/" element={<PublicRoute><LandingPage /></PublicRoute>} />
       <Route path="/login" element={<PublicRoute><LoginPage /></PublicRoute>} />
       <Route path="/signup" element={<PublicRoute><SignupPage /></PublicRoute>} />
-      
-      {/* Universal Routes */}
-      <Route path="/about" element={<About />} />
-      <Route path="/contact" element={<Contact />} />
       
       {/* Protected Routes */}
       <Route 
