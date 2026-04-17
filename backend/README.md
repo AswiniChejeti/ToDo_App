@@ -2,8 +2,9 @@
 
 This is the backend service for the TaskFlow application, built with **Node.js**, **Express**, and **MongoDB**. It provides a secure RESTful API for managing tasks and user authentication.
 
-## 🌐 Live API URL
-The backend API is live and hosted at: **[https://todo-app-yv0u.onrender.com](https://todo-app-yv0u.onrender.com)**
+## 🌐 Live URLs
+- **Backend API**: **[https://todo-app-yv0u.onrender.com](https://todo-app-yv0u.onrender.com)**
+- **Frontend Application**: **[https://aswini-todo-app.vercel.app](https://aswini-todo-app.vercel.app)**
 
 ## 🚀 Setup and Run Instructions
 
