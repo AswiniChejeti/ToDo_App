@@ -2,6 +2,9 @@
 
 This is the backend service for the TaskFlow application, built with **Node.js**, **Express**, and **MongoDB**. It provides a secure RESTful API for managing tasks and user authentication.
 
+## 🌐 Live API URL
+The backend API is live and hosted at: **[https://todo-app-yv0u.onrender.com](https://todo-app-yv0u.onrender.com)**
+
 ## 🚀 Setup and Run Instructions
 
 1.  **Navigate to the backend folder**:
@@ -88,3 +91,14 @@ This is the backend service for the TaskFlow application, built with **Node.js**
 ### 3. Production Readiness
 **Challenge**: Preparing the app for cloud deployment (e.g., Render).
 **Solution**: Refactored the entry point to prioritize `process.env.PORT` and ensured all database sensitive data is handled via environment variables only.
+
+---
+
+## 🤖 AI Tool Usage Disclosure
+
+As part of the development process for this application, the following AI tools were utilized:
+- **Tool Used**: Antigravity (AI Coding Assistant)
+- **Purpose**: Assisted with setting up robust backend architecture, debugging MongoDB connection issues, and configuring CORS and deployment environments for Render.
+
+### AI Certifications
+I am currently enrolled in an AI certification program at **Genaversity**. The certification is actively in progress and will be officially awarded upon the completion of the course curriculum.
