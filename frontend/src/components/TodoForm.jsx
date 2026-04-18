@@ -120,6 +120,7 @@ const TodoForm = ({ isOpen, onClose, onSubmit, editingTodo }) => {
                 <DatePicker
                   selected={dueDate}
                   onChange={(date) => setDueDate(date)}
+                  minDate={new Date()}
                   placeholderText="Pick a date"
                   isClearable
                   className="w-full glass-input pl-12 pr-4 py-3.5 rounded-2xl focus:ring-4 focus:ring-premium-500/10 focus:border-premium-500/50 transition-all font-bold text-sm"

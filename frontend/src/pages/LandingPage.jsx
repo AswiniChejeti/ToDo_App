@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { useTheme } from "../context/ThemeContext";
 import { 
+  Sun, 
+  Moon,
   CheckCircle2, 
   ArrowRight, 
   Sparkles, 
@@ -16,11 +21,10 @@ import {
   MessageSquare,
   MapPin
 } from "lucide-react";
-import { motion } from "framer-motion";
-import toast from "react-hot-toast";
 
 const LandingPage = () => {
   const [loading, setLoading] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const handleContactSubmit = (e) => {
     e.preventDefault();
@@ -50,10 +54,10 @@ const LandingPage = () => {
           </span>
         </div>
         
-        <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-300">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+        <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-500 dark:text-slate-400">
+          <a href="#features" className="hover:text-premium-600 dark:hover:text-white transition-colors">Features</a>
+          <a href="#about" className="hover:text-premium-600 dark:hover:text-white transition-colors">About</a>
+          <a href="#contact" className="hover:text-premium-600 dark:hover:text-white transition-colors">Contact</a>
         </div>
 
         <div className="flex items-center gap-4">
@@ -66,7 +70,7 @@ const LandingPage = () => {
 
           <Link 
             to="/login" 
-            className="px-5 py-2.5 text-sm font-bold text-slate-300 hover:text-white transition-colors"
+            className="px-5 py-2.5 text-sm font-bold text-slate-700 dark:text-slate-300 hover:text-premium-600 dark:hover:text-white transition-colors"
           >
             Log in
           </Link>
@@ -84,7 +88,7 @@ const LandingPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-premium-400 text-xs font-bold uppercase tracking-widest mb-8"
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-premium-600 dark:text-premium-400 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm"
         >
           <Sparkles size={14} />
           Next Generation Productivity
@@ -119,13 +123,16 @@ const LandingPage = () => {
         >
           <Link 
             to="/signup" 
-            className="px-10 py-5 bg-gradient-to-br from-premium-500 to-premium-700 rounded-2xl text-lg font-black hover:shadow-2xl hover:shadow-premium-500/40 hover:-translate-y-1 transition-all flex items-center gap-3 active:scale-95"
+            className="px-10 py-5 bg-gradient-to-br from-premium-500 to-premium-700 rounded-2xl text-lg font-black text-white hover:shadow-2xl hover:shadow-premium-500/40 hover:-translate-y-1 transition-all flex items-center gap-3 active:scale-95"
           >
             Start for Free <ArrowRight size={20} />
           </Link>
-          <button className="px-10 py-5 bg-slate-900 border border-white/10 rounded-2xl text-lg font-black hover:bg-slate-800 transition-all">
-            See Video Demo
-          </button>
+          <a 
+            href="#features" 
+            className="px-10 py-5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-2xl text-lg font-black text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-all text-center"
+          >
+            Explore Features
+          </a>
         </motion.div>
 
         {/* Dashboard Preview */}
@@ -143,11 +150,11 @@ const LandingPage = () => {
               className="w-full rounded-[2rem] opacity-90 sepia-[0.3]"
             />
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-slate-950/40 backdrop-blur-xl border border-white/10 px-8 py-4 rounded-full flex items-center gap-4 shadow-2xl">
-                <div className="w-12 h-12 bg-premium-500 rounded-xl flex items-center justify-center">
+              <div className="bg-white/40 dark:bg-slate-950/40 backdrop-blur-xl border border-slate-200 dark:border-white/10 px-8 py-4 rounded-full flex items-center gap-4 shadow-2xl">
+                <div className="w-12 h-12 bg-premium-500 rounded-xl flex items-center justify-center shadow-lg shadow-premium-500/20">
                   <MousePointer2 className="text-white" />
                 </div>
-                <span className="text-xl font-bold">Interactive Drag & Drop</span>
+                <span className="text-xl font-bold text-slate-900 dark:text-white">Interactive Drag & Drop</span>
               </div>
             </div>
           </div>
@@ -182,12 +189,12 @@ const LandingPage = () => {
             <motion.div 
               key={idx}
               whileHover={{ y: -10 }}
-              className="glass-card p-10 border-white/5 hover:border-premium-500/30 transition-colors group"
+              className="glass-card p-10 border-slate-200 dark:border-white/5 hover:border-premium-500/30 transition-colors group"
             >
-              <div className="w-14 h-14 bg-slate-900 border border-white/10 rounded-2xl flex items-center justify-center mb-6 text-premium-500 group-hover:bg-premium-600 group-hover:text-white transition-all">
+              <div className="w-14 h-14 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-2xl flex items-center justify-center mb-6 text-premium-500 group-hover:bg-premium-600 group-hover:text-white transition-all shadow-sm">
                 {feature.icon}
               </div>
-              <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+              <h3 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">{feature.title}</h3>
               <p className="text-slate-600 dark:text-slate-500 leading-relaxed">{feature.desc}</p>
             </motion.div>
           ))}
@@ -204,24 +211,24 @@ const LandingPage = () => {
           About <span className="text-premium-500">TaskFlow.</span>
         </h2>
 
-        <p className="text-slate-300 text-lg md:text-xl max-w-3xl mb-20 leading-relaxed">
+        <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl max-w-3xl mb-20 leading-relaxed">
           We believe that software should get out of your way and let you focus. TaskFlow was built with a singular vision: to create the most intuitive, beautiful, and secure task management experience on the web.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8 w-full text-left">
-           {[
-             { icon: <Target className="text-premium-400"/>, title: "Our Mission", desc: "To empower individuals and teams to achieve peak productivity through beautiful, friction-free design." },
-             { icon: <Users className="text-premium-400"/>, title: "Who We Are", desc: "A small team of passionate developers, designers, and perfectionists dedicated to crafting premium web experiences." },
-             { icon: <Shield className="text-premium-400"/>, title: "Our Promise", desc: "Uncompromising privacy. We don't sell your data, we don't serve ads. Your tasks are yours alone." }
-           ].map((item, idx) => (
-             <div key={idx} className="glass-card p-8 border-white/5">
+            {[
+              { icon: <Target className="text-premium-400"/>, title: "Our Mission", desc: "To empower individuals and teams to achieve peak productivity through beautiful, friction-free design." },
+              { icon: <Users className="text-premium-400"/>, title: "Who We Are", desc: "A small team of passionate developers, designers, and perfectionists dedicated to crafting premium web experiences." },
+              { icon: <Shield className="text-premium-400"/>, title: "Our Promise", desc: "Uncompromising privacy. We don't sell your data, we don't serve ads. Your tasks are yours alone." }
+            ].map((item, idx) => (
+              <div key={idx} className="glass-card p-8 border-slate-200 dark:border-white/5">
                 <div className="w-12 h-12 rounded-xl bg-premium-500/10 border border-premium-500/20 flex items-center justify-center mb-6">
                    {item.icon}
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-slate-300 leading-relaxed">{item.desc}</p>
-             </div>
-           ))}
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{item.title}</h3>
+                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
         </div>
       </section>
 
@@ -229,31 +236,31 @@ const LandingPage = () => {
       <section id="contact" className="relative z-10 py-32 px-6 max-w-6xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-6">Let's <span className="text-premium-500">talk.</span></h2>
-          <p className="text-slate-300 text-lg max-w-2xl mx-auto">Have a question, feedback, or just want to say hi? We'd love to hear from you.</p>
+          <p className="text-slate-600 dark:text-slate-300 text-lg max-w-2xl mx-auto">Have a question, feedback, or just want to say hi? We'd love to hear from you.</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-16 items-start max-w-5xl mx-auto">
           {/* Contact Info */}
           <div className="space-y-10">
             <div>
-              <h3 className="text-2xl font-bold mb-8 text-white">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-8 text-slate-900 dark:text-white">Contact Information</h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-center text-premium-400">
                     <Mail size={20} />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 font-bold uppercase tracking-wider mb-1">Email Us</p>
-                    <p className="text-lg text-slate-200">hello@taskflow.com</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Email Us</p>
+                    <p className="text-lg text-slate-700 dark:text-slate-200">hello@taskflow.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-center text-premium-400">
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-white/5 flex items-center justify-center text-premium-400">
                     <MessageSquare size={20} />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-400 font-bold uppercase tracking-wider mb-1">Support</p>
-                    <p className="text-lg text-slate-200">support@taskflow.com</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mb-1">Support</p>
+                    <p className="text-lg text-slate-700 dark:text-slate-200">support@taskflow.com</p>
                   </div>
                 </div>
               </div>
@@ -262,26 +269,26 @@ const LandingPage = () => {
 
           {/* Contact Form */}
           <div>
-            <form onSubmit={handleContactSubmit} className="glass-card p-8 border-white/10 space-y-6">
+            <form onSubmit={handleContactSubmit} className="glass-card p-8 border-slate-200 dark:border-white/10 space-y-6">
               <div className="grid grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold tracking-wide text-slate-200">First Name</label>
-                  <input required type="text" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="John" />
+                  <label className="text-sm font-bold tracking-wide text-slate-700 dark:text-slate-200">First Name</label>
+                  <input required type="text" className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="John" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-bold tracking-wide text-slate-200">Last Name</label>
-                  <input required type="text" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="Doe" />
+                  <label className="text-sm font-bold tracking-wide text-slate-700 dark:text-slate-200">Last Name</label>
+                  <input required type="text" className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="Doe" />
                 </div>
               </div>
               
               <div className="space-y-2">
-                <label className="text-sm font-bold tracking-wide text-slate-200">Email Address</label>
-                <input required type="email" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="john@example.com" />
+                <label className="text-sm font-bold tracking-wide text-slate-700 dark:text-slate-200">Email Address</label>
+                <input required type="email" className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-premium-500 transition-colors" placeholder="john@example.com" />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-bold tracking-wide text-slate-200">Message</label>
-                <textarea required rows="4" className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-premium-500 transition-colors resize-none" placeholder="How can we help you?"></textarea>
+                <label className="text-sm font-bold tracking-wide text-slate-700 dark:text-slate-200">Message</label>
+                <textarea required rows="4" className="w-full bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-premium-500 transition-colors resize-none" placeholder="How can we help you?"></textarea>
               </div>
 
               <button 
@@ -297,42 +304,42 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 bg-slate-950 border-t border-white/5 pt-20 pb-10 px-6">
+      <footer className="relative z-10 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-white/5 pt-20 pb-10 px-6 mt-20 transition-colors">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-6">
-              <Layers className="text-premium-500" size={28} />
-              <span className="text-2xl font-black tracking-tight">TaskFlow.</span>
+              <Layers className="text-premium-600 dark:text-premium-500" size={28} />
+              <span className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">TaskFlow.</span>
             </div>
-            <p className="text-slate-500 max-w-xs leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-500 max-w-xs leading-relaxed">
               Experience the future of personal management. Built for those who demand perfection in their workflow.
             </p>
           </div>
           <div>
-            <h4 className="font-bold mb-6 text-white uppercase text-xs tracking-widest">Platform</h4>
-            <ul className="space-y-4 text-slate-500 text-sm">
-              <li><a href="#" className="hover:text-premium-400">Features</a></li>
-              <li><a href="#" className="hover:text-premium-400">Integrations</a></li>
-              <li><a href="#" className="hover:text-premium-400">Security</a></li>
+            <h4 className="font-bold mb-6 text-slate-900 dark:text-white uppercase text-xs tracking-widest">Platform</h4>
+            <ul className="space-y-4 text-slate-600 dark:text-slate-500 text-sm">
+              <li><a href="#" className="hover:text-premium-600 transition-colors">Features</a></li>
+              <li><a href="#" className="hover:text-premium-600 transition-colors">Integrations</a></li>
+              <li><a href="#" className="hover:text-premium-600 transition-colors">Security</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-bold mb-6 text-white uppercase text-xs tracking-widest">Company</h4>
-            <ul className="space-y-4 text-slate-400 text-sm">
-              <li><a href="#about" className="hover:text-premium-400">About Us</a></li>
-              <li><a href="#contact" className="hover:text-premium-400">Contact Us</a></li>
-              <li><a href="#" className="hover:text-premium-400">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-premium-400">Terms of Service</a></li>
+            <h4 className="font-bold mb-6 text-slate-900 dark:text-white uppercase text-xs tracking-widest">Company</h4>
+            <ul className="space-y-4 text-slate-600 dark:text-slate-500 text-sm">
+              <li><a href="#about" className="hover:text-premium-600 transition-colors">About Us</a></li>
+              <li><a href="#contact" className="hover:text-premium-600 transition-colors">Contact Us</a></li>
+              <li><a href="#" className="hover:text-premium-600 transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-premium-600 transition-colors">Terms of Service</a></li>
             </ul>
           </div>
         </div>
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between pt-10 border-t border-white/5 text-slate-600 text-sm">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between pt-10 border-t border-slate-200 dark:border-white/5 text-slate-500 dark:text-slate-600 text-sm">
           <p>© 2026 TaskFlow. Rebuilt for Excellence.</p>
           <div className="flex gap-8 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Twitter</a>
-            <a href="#" className="hover:text-white transition-colors">GitHub</a>
-            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
+            <a href="#" className="hover:text-premium-600 dark:hover:text-white transition-colors">Twitter</a>
+            <a href="#" className="hover:text-premium-600 dark:hover:text-white transition-colors">GitHub</a>
+            <a href="#" className="hover:text-premium-600 dark:hover:text-white transition-colors">LinkedIn</a>
           </div>
         </div>
       </footer>

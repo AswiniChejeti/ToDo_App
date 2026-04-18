@@ -7,14 +7,15 @@ import {
   Layers, 
   AlertCircle,
   Loader2,
-  Sparkles
+  Sparkles,
+  Sun,
+  Moon
 } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
-import { Sun, Moon } from "lucide-react";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
@@ -71,6 +72,7 @@ const LoginPage = () => {
           {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
         </button>
       </div>
+
       {/* Form Side */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 relative z-10">
         <motion.div 
@@ -81,6 +83,8 @@ const LoginPage = () => {
           <div className="mb-10 text-center">
             <Link to="/" className="inline-flex items-center gap-2 mb-8 text-premium-500">
               <Layers size={28} />
+              <span className="text-2xl font-black text-slate-900 dark:text-white">TaskFlow.</span>
+            </Link>
             <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-2">Welcome Back</h1>
             <p className="text-slate-500 dark:text-slate-400">Please enter your details to sign in.</p>
           </div>
