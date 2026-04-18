@@ -8,7 +8,9 @@ import {
   ArrowRight, 
   Layers, 
   AlertCircle,
-  Loader2
+  Loader2,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -26,6 +28,7 @@ const SignupPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
@@ -67,16 +70,33 @@ const SignupPage = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // Immediate filtering for phone number: don't even let them type letters
-    if (name === "phone" && value !== "" && !/^[0-9]+$/.test(value)) {
-      return; 
+    // Immediate filtering for phone number
+    if (name === "phone") {
+      if (value !== "" && !/^[0-9]+$/.test(value)) return;
+      if (value.length > 10) return;
     }
 
     setFormData({ ...formData, [name]: value });
-    // Clear error for that field as they type
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: null });
+    
+    // On-the-spot validation
+    let error = "";
+    if (name === "username") {
+      if (!value.trim()) error = "Username is required";
+    } else if (name === "email") {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!value) error = "Email is required";
+      else if (!emailRegex.test(value)) error = "Please enter a valid email address";
+    } else if (name === "phone") {
+      if (!value) error = "Phone number is required";
+      else if (!/^[0-9]+$/.test(value)) error = "Numeric only";
+      else if (value.length < 10) error = "Must be 10 digits";
+    } else if (name === "password") {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!value) error = "Password is required";
+      else if (!passwordRegex.test(value)) error = "Requires Uppercase, Lowercase, Number & Symbol";
     }
+
+    setErrors(prev => ({ ...prev, [name]: error }));
   };
 
   const handleSubmit = async (e) => {
@@ -219,13 +239,20 @@ const SignupPage = () => {
                   <Lock size={18} />
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className={`w-full bg-slate-50 dark:bg-slate-950 border ${errors.password ? 'border-red-500/50' : 'border-slate-200 dark:border-white/10'} rounded-2xl py-4 pl-12 pr-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-premium-500/20 focus:border-premium-500/50 transition-all`}
+                  className={`w-full bg-slate-50 dark:bg-slate-950 border ${errors.password ? 'border-red-500/50' : 'border-slate-200 dark:border-white/10'} rounded-2xl py-4 pl-12 pr-12 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-premium-500/20 focus:border-premium-500/50 transition-all`}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-premium-500 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
               {errors.password && <p className="text-red-400 text-xs flex items-center gap-1 mt-1 px-1"><AlertCircle size={12} /> {errors.password}</p>}
             </div>

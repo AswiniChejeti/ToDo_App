@@ -9,7 +9,9 @@ import {
   Loader2,
   Sparkles,
   Sun,
-  Moon
+  Moon,
+  Eye,
+  EyeOff
 } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
@@ -24,6 +26,7 @@ const LoginPage = () => {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
@@ -39,6 +42,16 @@ const LoginPage = () => {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Clear/Validate on the fly
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: "" }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -98,8 +111,9 @@ const LoginPage = () => {
                 </div>
                 <input
                   type="email"
+                  name="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={handleChange}
                   placeholder="name@company.com"
                   className={`w-full bg-slate-50 dark:bg-slate-950 border ${errors.email ? 'border-red-500/50' : 'border-slate-200 dark:border-white/10'} rounded-2xl py-4 pl-12 pr-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-premium-500/20 focus:border-premium-500/50 transition-all`}
                 />
@@ -116,12 +130,20 @@ const LoginPage = () => {
                   <Lock size={18} />
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
+                  name="password"
                   value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
+                  onChange={handleChange}
                   placeholder="••••••••"
-                  className={`w-full bg-slate-50 dark:bg-slate-950 border ${errors.password ? 'border-red-500/50' : 'border-slate-200 dark:border-white/10'} rounded-2xl py-4 pl-12 pr-4 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-premium-500/20 focus:border-premium-500/50 transition-all`}
+                  className={`w-full bg-slate-50 dark:bg-slate-950 border ${errors.password ? 'border-red-500/50' : 'border-slate-200 dark:border-white/10'} rounded-2xl py-4 pl-12 pr-12 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-premium-500/20 focus:border-premium-500/50 transition-all`}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-500 hover:text-premium-500 transition-colors"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
               </div>
               {errors.password && <p className="text-red-400 text-xs flex items-center gap-1 mt-1 px-1"><AlertCircle size={12} /> {errors.password}</p>}
             </div>
