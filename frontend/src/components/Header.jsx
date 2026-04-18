@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 
 const Header = ({ onAddClick, onLogout, user, isDarkMode, setIsDarkMode, stats }) => {
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/10 dark:border-slate-800/50 glass-card bg-white/70 dark:bg-slate-950/40 backdrop-blur-md px-6 py-4">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-white/10 glass-card bg-white/70 dark:bg-slate-950/40 backdrop-blur-md px-6 py-4">
       <div className="max-w-4xl mx-auto flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 group cursor-pointer">
           <div className="p-2 bg-gradient-to-br from-premium-500 to-premium-600 rounded-xl shadow-lg shadow-premium-500/20 group-hover:scale-110 transition-transform duration-300">
@@ -29,7 +29,7 @@ const Header = ({ onAddClick, onLogout, user, isDarkMode, setIsDarkMode, stats }
 
         <div className="flex items-center gap-4">
           {user && (
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
+            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5">
               <div className="w-6 h-6 rounded-full bg-premium-500 flex items-center justify-center">
                 <UserIcon size={12} className="text-white" />
               </div>

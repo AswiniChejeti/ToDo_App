@@ -9,7 +9,7 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, title, message, loading }) =
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-        className="w-full max-w-md glass-card overflow-hidden rounded-2xl border-white/20 p-6 text-center"
+        className="w-full max-w-md glass-card overflow-hidden rounded-2xl border-slate-200 dark:border-white/20 p-6 text-center"
       >
         <div className="mx-auto w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center text-red-600 dark:text-red-500 mb-4 animate-pulse">
           <AlertTriangle size={32} />
