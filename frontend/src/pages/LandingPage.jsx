@@ -1,20 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { 
-  CheckCircle2, 
-  ArrowRight, 
-  Sparkles, 
-  Zap, 
-  ShieldCheck, 
-  MousePointer2, 
-  Calendar,
-  Layers
-} from "lucide-react";
 import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 
 const LandingPage = () => {
+  const { isDarkMode, toggleTheme } = useTheme();
   return (
-    <div className="min-h-screen bg-slate-950 text-white selection:bg-premium-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-white selection:bg-premium-500/30 overflow-x-hidden transition-colors duration-500">
       {/* Background Decor */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-premium-600/10 blur-[150px] rounded-full"></div>
@@ -22,23 +12,30 @@ const LandingPage = () => {
       </div>
 
       {/* Header */}
-      <nav className="relative z-50 flex items-center justify-between px-6 py-6 max-w-7xl mx-auto border-b border-white/5 backdrop-blur-md bg-slate-950/20">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 max-w-7xl mx-auto border-b border-slate-200 dark:border-white/5 backdrop-blur-md bg-white/70 dark:bg-slate-950/20 transition-all">
         <div className="flex items-center gap-2 group cursor-pointer">
           <div className="p-2 bg-gradient-to-br from-premium-500 to-premium-600 rounded-xl shadow-lg shadow-premium-500/20 group-hover:scale-110 transition-transform duration-300">
             <Layers className="text-white" size={24} />
           </div>
-          <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+          <span className="text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-500 dark:from-white dark:to-slate-400">
             TaskFlow<span className="text-premium-500">.</span>
           </span>
         </div>
         
-        <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-400">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+        <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-500 dark:text-slate-400">
+          <a href="#features" className="hover:text-premium-600 dark:hover:text-white transition-colors">Features</a>
+          <a href="#about" className="hover:text-premium-600 dark:hover:text-white transition-colors">About</a>
+          <a href="#contact" className="hover:text-premium-600 dark:hover:text-white transition-colors">Contact</a>
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={toggleTheme}
+            className="p-2.5 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 hover:bg-slate-200 dark:hover:bg-white/10 transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white active:scale-95"
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+
           <Link 
             to="/login" 
             className="px-5 py-2.5 text-sm font-bold text-slate-300 hover:text-white transition-colors"
@@ -55,7 +52,7 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative z-10 pt-24 pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+      <section className="relative z-10 pt-32 pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,7 +78,7 @@ const LandingPage = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-slate-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed"
+          className="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-2xl mb-12 leading-relaxed"
         >
           The intelligent task manager that adapts to you. Experience drag-and-drop prioritization, smart due dates, and absolute privacy in one premium dashboard.
         </motion.p>
@@ -133,7 +130,7 @@ const LandingPage = () => {
       <section id="features" className="relative z-10 py-32 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-black mb-4">Everything you need.</h2>
-          <p className="text-slate-500 text-lg">Powerful features built into a single, beautiful interface.</p>
+          <p className="text-slate-600 dark:text-slate-500 text-lg">Powerful features built into a single, beautiful interface.</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
@@ -163,7 +160,7 @@ const LandingPage = () => {
                 {feature.icon}
               </div>
               <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-              <p className="text-slate-500 leading-relaxed">{feature.desc}</p>
+              <p className="text-slate-600 dark:text-slate-500 leading-relaxed">{feature.desc}</p>
             </motion.div>
           ))}
         </div>

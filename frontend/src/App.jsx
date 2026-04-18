@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "./context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -17,11 +18,8 @@ function App() {
   const [todoToDelete, setTodoToDelete] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const { user, logout } = useAuth();
+  const { isDarkMode, setIsDarkMode } = useTheme();
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("darkMode") === "true" || 
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-  );
 
   useEffect(() => {
     if (user) {
@@ -29,14 +27,7 @@ function App() {
     }
   }, [user]);
 
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    localStorage.setItem("darkMode", isDarkMode);
-  }, [isDarkMode]);
+
 
   const fetchTodos = async () => {
     setLoading(true);
