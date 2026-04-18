@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import LandingPage from '../pages/LandingPage';
 import LoginPage from '../pages/Auth/LoginPage';
 import SignupPage from '../pages/Auth/SignupPage';
-import MainDashboard from '../App'; // We will rename App.jsx content later or use it as the dashboard
+import MainDashboard from '../App';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();

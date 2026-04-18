@@ -2,6 +2,9 @@
 
 A high-performance, premium React frontend for TaskFlow, built with **Vite**, **Framer Motion**, and **Tailwind CSS**.
 
+## 🌐 Live Demo
+The application is live and can be accessed at: **[https://aswini-todo-app.vercel.app](https://aswini-todo-app.vercel.app)**
+
 ## 🚀 Setup and Run Instructions
 
 1.  **Navigate to the frontend folder**:
@@ -69,3 +72,14 @@ A high-performance, premium React frontend for TaskFlow, built with **Vite**, **
 ### 4. SPA Routing on Deployment
 **Challenge**: React Router paths causing 404 errors on browser refresh after deployment to Vercel.
 **Solution**: Created a `vercel.json` rewrite configuration to ensure all requests are routed to `index.html`.
+
+---
+
+## 🤖 AI Tool Usage Disclosure
+
+As part of the development process for this application, the following AI tools were utilized:
+- **Tool Used**: Antigravity (AI Coding Assistant)
+- **Purpose**: Assisted with scaffolding complex UI components, debugging React router navigation, resolving styling inconsistencies, and configuring the Vercel deployment setup.
+
+### AI Certifications
+I am currently enrolled in an AI certification program at **Genaversity**. The certification is actively in progress and will be officially awarded upon the completion of the course curriculum.
